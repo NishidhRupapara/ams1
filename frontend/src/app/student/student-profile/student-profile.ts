@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -27,7 +28,7 @@ export class StudentProfileComponent implements OnInit {
   }
 
   fetchProfile(sid: string) {
-    this.http.get<any>(`http://localhost:5139/api/Student/profile/${sid}`)
+    this.http.get<any>(`${CONFIG.API_URL}/Student/profile/${sid}`)
       .subscribe({
         next: (data) => {
           this.zone.run(() => {
@@ -45,3 +46,4 @@ export class StudentProfileComponent implements OnInit {
       });
   }
 }
+

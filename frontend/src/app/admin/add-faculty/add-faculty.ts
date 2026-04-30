@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core'; // ✅ Added OnInit and ChangeDetectorRef
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -32,7 +33,7 @@ export class AddFacultyComponent implements OnInit {
   }
 
   fetchDepartments() {
-    this.http.get<any[]>("http://localhost:5139/api/Departments/Dall").subscribe({
+    this.http.get<any[]>(`${CONFIG.API_URL}/Departments/Dall`).subscribe({
       next: (res) => {
         this.departments = res;
         this.cdr.detectChanges(); 
@@ -53,7 +54,7 @@ export class AddFacultyComponent implements OnInit {
       this.cdr.detectChanges();
       return;
     }
-    this.http.post("http://localhost:5139/api/Faculty/register", this.formData).subscribe({
+    this.http.post(`${CONFIG.API_URL}/Faculty/register`, this.formData).subscribe({
       next: () => {
         this.feedback = { type: "success", msg: "✅ Faculty Added Successfully!" };
         this.resetForm();

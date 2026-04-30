@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -32,7 +33,7 @@ export class ViewMyAttendanceComponent implements OnInit {
   }
 
   fetchAttendance(sid: string) {
-    this.http.get<any[]>(`http://localhost:5139/api/Student/my-attendance/${sid}`)
+    this.http.get<any[]>(`${CONFIG.API_URL}/Student/my-attendance/${sid}`)
       .subscribe({
         next: (data) => {
           this.zone.run(() => {

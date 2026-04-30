@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -30,7 +31,7 @@ export class ViewAssignmentsComponent implements OnInit {
   }
 
   fetchAssignments(dept: string) {
-    this.http.get<any[]>(`http://localhost:5139/api/Student/assignments/${dept}`)
+    this.http.get<any[]>(`${CONFIG.API_URL}/Student/assignments/${dept}`)
       .subscribe({
         next: (data) => {
           this.zone.run(() => {
@@ -48,3 +49,4 @@ export class ViewAssignmentsComponent implements OnInit {
       });
   }
 }
+

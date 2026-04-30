@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -52,7 +53,7 @@ export class StudyMaterialComponent implements OnInit {
   }
 
   fetchDepartments(): void {
-    this.http.get<string[]>("http://localhost:5139/api/Faculty/departments").subscribe({
+    this.http.get<string[]>(`${CONFIG.API_URL}/Faculty/departments`).subscribe({
       next: (data) => {
         this.departments = data;
         this.cdr.detectChanges();
@@ -85,7 +86,7 @@ export class StudyMaterialComponent implements OnInit {
       FileData: this.form.fileData
     };
 
-    this.http.post("http://localhost:5139/api/Faculty/study-material", payload)
+    this.http.post(`${CONFIG.API_URL}/Faculty/study-material`, payload)
       .subscribe({
         next: (res: any) => {
           this.feedback = { type: 'success', msg: res.message };
@@ -111,7 +112,7 @@ export class StudyMaterialComponent implements OnInit {
     }
 
     this.isLoading = true;
-    const url = `http://localhost:5139/api/Faculty/my-materials/${this.facultyId}`;
+    const url = `${CONFIG.API_URL}/Faculty/my-materials/${this.facultyId}`;
 
     this.http.get<any[]>(url).subscribe({
         next: (data) => {
@@ -135,3 +136,4 @@ export class StudyMaterialComponent implements OnInit {
     });
   }
 }
+

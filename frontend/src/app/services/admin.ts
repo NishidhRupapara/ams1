@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { CONFIG } from '../config';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
-  // Your C# Backend Base URL
-  private apiUrl = 'http://localhost:5139/api';
+  private apiUrl = CONFIG.API_URL;
 
   constructor(private http: HttpClient) { }
 

@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -20,7 +21,7 @@ export class SuggestionComponent implements OnInit {
   selectedSuggestion: any = null;
 
   // ✅ FIXED: Changed "Faculty" to "Admin" to match your Backend Controller
-  private apiUrl = "http://localhost:5139/api/Admin";
+  private apiUrl = `${CONFIG.API_URL}/Admin`;
 
   constructor(private http: HttpClient, private cdr: ChangeDetectorRef) {}
 
@@ -29,7 +30,7 @@ export class SuggestionComponent implements OnInit {
   }
 
   fetchSuggestions(): void {
-    // ✅ This will now call http://localhost:5139/api/Admin/AllSuggestionFaculty
+    // ✅ This will now call `${CONFIG.API_URL}/Admin/AllSuggestionFaculty`
     this.http.get<any[]>(`${this.apiUrl}/AllSuggestionFaculty`).subscribe({
       next: (data) => {
         this.suggestions = data;
@@ -51,7 +52,7 @@ export class SuggestionComponent implements OnInit {
   }
 
   handleUpdate(): void {
-    // ✅ This will now call http://localhost:5139/api/Admin/suggestion/{id}
+    // ✅ This will now call `${CONFIG.API_URL}/Admin/suggestion/{id}`
     this.http.put(
       `${this.apiUrl}/suggestion/${this.selectedSuggestion.suggestionId}`,
       this.selectedSuggestion

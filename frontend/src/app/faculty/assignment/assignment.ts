@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -52,7 +53,7 @@ export class AssignmentComponent implements OnInit {
   }
 
   fetchDepartments(): void {
-    this.http.get<any[]>("http://localhost:5139/api/Departments/Dall")
+    this.http.get<any[]>(`${CONFIG.API_URL}/Departments/Dall`)
       .subscribe({
         next: (data) => {
           this.departments = data;
@@ -88,7 +89,7 @@ export class AssignmentComponent implements OnInit {
       FileData: this.form.fileData
     };
 
-    this.http.post("http://localhost:5139/api/Faculty/post-assignment", payload)
+    this.http.post(`${CONFIG.API_URL}/Faculty/post-assignment`, payload)
       .subscribe({
         next: (res: any) => {
           this.feedback = { type: 'success', msg: res.message };
@@ -109,7 +110,7 @@ export class AssignmentComponent implements OnInit {
 
   fetchMyAssignments(): void {
     this.isLoading = true;
-    this.http.get<any[]>(`http://localhost:5139/api/Faculty/my-assignments/${this.facultyId}`)
+    this.http.get<any[]>(`${CONFIG.API_URL}/Faculty/my-assignments/${this.facultyId}`)
       .subscribe({
         next: (data) => {
           this.myAssignments = data;

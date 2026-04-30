@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -25,7 +26,7 @@ export class EditAttendanceComponent implements OnInit {
     date: ''
   };
 
-  private apiUrl = "http://localhost:5139/api/Admin/history";
+  private apiUrl = `${CONFIG.API_URL}/Admin/history`;
 
   constructor(
     private http: HttpClient,

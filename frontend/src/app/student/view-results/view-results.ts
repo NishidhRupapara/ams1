@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -31,7 +32,7 @@ export class ViewResultsComponent implements OnInit {
 
   fetchResults(sid: string) {
     this.isLoading = true;
-    this.http.get<any[]>(`http://localhost:5139/api/Exam/results/student/${sid}`)
+    this.http.get<any[]>(`${CONFIG.API_URL}/Exam/results/student/${sid}`)
       .subscribe({
         next: (data) => {
           this.results = data.map(r => ({

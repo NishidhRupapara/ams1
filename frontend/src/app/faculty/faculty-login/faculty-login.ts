@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -22,7 +23,7 @@ export class FacultyLoginComponent {
     this.loading = true;
     this.error = '';
 
-    this.http.post<any>("http://localhost:5139/api/Faculty/login", this.form).subscribe({
+    this.http.post<any>(`${CONFIG.API_URL}/Faculty/login`, this.form).subscribe({
       next: (res) => {
         // 🚀 THE FIX: Prefer the MongoDB string ObjectId since 'fid' could be 0
         const fId = res.id || res.Id || res.fid || res.Fid;
@@ -48,3 +49,4 @@ export class FacultyLoginComponent {
     });
   }
 }
+

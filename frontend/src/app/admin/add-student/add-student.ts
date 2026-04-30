@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -36,7 +37,7 @@ export class AddStudentComponent implements OnInit {
   }
 
   fetchFaculties() {
-    this.http.get<any[]>("http://localhost:5139/api/Faculty/all").subscribe({
+    this.http.get<any[]>(`${CONFIG.API_URL}/Faculty/all`).subscribe({
       next: (data) => {
         this.faculties = Array.isArray(data) ? data : (data as any)?.data || [];
       },
@@ -45,7 +46,7 @@ export class AddStudentComponent implements OnInit {
   }
 
   fetchDepartments() {
-    this.http.get<any[]>("http://localhost:5139/api/Departments/Dall").subscribe({
+    this.http.get<any[]>(`${CONFIG.API_URL}/Departments/Dall`).subscribe({
       next: (data) => {
         this.departments = Array.isArray(data) ? data : (data as any)?.data || [];
         console.log("✅ Departments loaded:", this.departments);
@@ -78,7 +79,7 @@ export class AddStudentComponent implements OnInit {
     if (payload.DOB === "") (payload as any).DOB = null;
     if (payload.DOA === "") (payload as any).DOA = null;
 
-    this.http.post("http://localhost:5139/api/Student/add", payload).subscribe({
+    this.http.post(`${CONFIG.API_URL}/Student/add`, payload).subscribe({
       next: (res: any) => {
         this.message = "✅ Student added successfully!";
         this.resetForm();
@@ -100,3 +101,4 @@ export class AddStudentComponent implements OnInit {
     this.filteredFaculties = [];
   }
 }
+

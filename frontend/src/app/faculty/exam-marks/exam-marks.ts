@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -42,7 +43,7 @@ export class ExamMarksComponent implements OnInit {
     }
 
     this.isLoading = true;
-    this.http.get<any[]>(`http://localhost:5139/api/Faculty/students-by-dept/${this.examDetails.department}`)
+    this.http.get<any[]>(`${CONFIG.API_URL}/Faculty/students-by-dept/${this.examDetails.department}`)
       .subscribe({
         next: (data) => {
           this.studentsList = data;
@@ -77,7 +78,7 @@ export class ExamMarksComponent implements OnInit {
       MarksObtained: this.marksData[student.sid || student.Sid] || 0 // Default to 0 if left blank
     }));
 
-    this.http.post("http://localhost:5139/api/Faculty/submit-marks", payload)
+    this.http.post(`${CONFIG.API_URL}/Faculty/submit-marks`, payload)
       .subscribe({
         next: (res: any) => {
           this.feedback = { type: 'success', msg: res.message };

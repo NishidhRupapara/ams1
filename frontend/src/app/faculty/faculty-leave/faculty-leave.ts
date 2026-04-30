@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -58,7 +59,7 @@ export class FacultyLeaveComponent implements OnInit {
       reason: this.form.reason
     };
 
-    this.http.post("http://localhost:5139/api/Faculty/apply-leave", payload)
+    this.http.post(`${CONFIG.API_URL}/Faculty/apply-leave`, payload)
       .subscribe({
         next: (res: any) => {
           this.feedback = { type: 'success', msg: res.message };
@@ -71,7 +72,7 @@ export class FacultyLeaveComponent implements OnInit {
 
   fetchMyLeaves(): void {
     this.isLoading = true;
-    this.http.get<any[]>(`http://localhost:5139/api/Faculty/my-leaves/${this.facultyId}`)
+    this.http.get<any[]>(`${CONFIG.API_URL}/Faculty/my-leaves/${this.facultyId}`)
       .subscribe({
         next: (data) => {
           this.myLeaves = data;

@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -54,12 +55,12 @@ export class FacultyExamComponent implements OnInit {
   }
 
   fetchDepartments(): void {
-    this.http.get<any[]>("http://localhost:5139/api/Departments/Dall").subscribe(data => this.departments = data);
+    this.http.get<any[]>(`${CONFIG.API_URL}/Departments/Dall`).subscribe(data => this.departments = data);
   }
 
   fetchExams(): void {
     if (!this.facultyId) return;
-    this.http.get<any[]>(`http://localhost:5139/api/Exam/faculty/${this.facultyId}`).subscribe(data => {
+    this.http.get<any[]>(`${CONFIG.API_URL}/Exam/faculty/${this.facultyId}`).subscribe(data => {
       this.exams = data;
       this.cdr.detectChanges();
     });
@@ -136,7 +137,7 @@ export class FacultyExamComponent implements OnInit {
     console.log("Validation passed. Submitting Exam Payload:", payload);
     this.isLoading = true;
 
-    this.http.post("http://localhost:5139/api/Exam/create", payload).subscribe({
+    this.http.post(`${CONFIG.API_URL}/Exam/create`, payload).subscribe({
       next: (res: any) => {
         console.log("Exam Created:", res);
         this.isLoading = false;
@@ -179,7 +180,7 @@ export class FacultyExamComponent implements OnInit {
   }
 
   publishResults(examId: string): void {
-    this.http.put(`http://localhost:5139/api/Exam/publish/${examId}`, {}).subscribe({
+    this.http.put(`${CONFIG.API_URL}/Exam/publish/${examId}`, {}).subscribe({
       next: (res: any) => {
         alert(res.message);
         this.fetchExams();
@@ -310,3 +311,4 @@ export class FacultyExamComponent implements OnInit {
     reader.readAsArrayBuffer(file);
   }
 }
+

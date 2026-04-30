@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -21,7 +22,7 @@ export class AdminAssignmentsComponent implements OnInit {
   }
 
   fetchAssignments(): void {
-    this.http.get<any[]>("http://localhost:5139/api/Admin/all-assignments").subscribe({
+    this.http.get<any[]>(`${CONFIG.API_URL}/Admin/all-assignments`).subscribe({
       next: (data) => {
         this.assignments = data;
         this.isLoading = false;
@@ -32,7 +33,7 @@ export class AdminAssignmentsComponent implements OnInit {
 
   deleteAssignment(id: string): void {
     if (confirm("Are you sure you want to delete this assignment?")) {
-      this.http.delete(`http://localhost:5139/api/Admin/assignment/${id}`).subscribe({
+      this.http.delete(`${CONFIG.API_URL}/Admin/assignment/${id}`).subscribe({
         next: () => {
           this.assignments = this.assignments.filter(a => a.id !== id);
           alert("Assignment deleted successfully!");
@@ -42,3 +43,4 @@ export class AdminAssignmentsComponent implements OnInit {
     }
   }
 }
+

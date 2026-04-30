@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -31,7 +32,7 @@ export class AdminExamComponent implements OnInit {
   }
 
   fetchExams(): void {
-    this.http.get<any[]>("http://localhost:5139/api/Exam/all").subscribe({
+    this.http.get<any[]>(`${CONFIG.API_URL}/Exam/all`).subscribe({
       next: (data) => {
         this.exams = data;
         this.isLoading = false;
@@ -45,7 +46,7 @@ export class AdminExamComponent implements OnInit {
 
   deleteExam(id: string): void {
     if (confirm("Are you sure you want to delete this exam?")) {
-      this.http.delete(`http://localhost:5139/api/Exam/${id}`).subscribe({
+      this.http.delete(`${CONFIG.API_URL}/Exam/${id}`).subscribe({
         next: () => {
           this.exams = this.exams.filter(e => (e.id || e.Id) !== id);
           alert("Exam deleted successfully!");
@@ -58,7 +59,7 @@ export class AdminExamComponent implements OnInit {
   viewResults(exam: any): void {
     const id = exam.id || exam.Id;
     this.selectedExamTitle = exam.title;
-    this.http.get<any[]>(`http://localhost:5139/api/Exam/attempts/${id}`).subscribe({
+    this.http.get<any[]>(`${CONFIG.API_URL}/Exam/attempts/${id}`).subscribe({
       next: (data) => {
         this.selectedAttempts = data.map(a => ({
           studentName: a.studentName || a.StudentName,
@@ -77,3 +78,4 @@ export class AdminExamComponent implements OnInit {
     this.selectedAttempts = [];
   }
 }
+

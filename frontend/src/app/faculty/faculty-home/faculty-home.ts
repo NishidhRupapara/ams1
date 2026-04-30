@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component, OnInit, OnDestroy, NgZone, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -52,7 +53,7 @@ export class FacultyHomeComponent implements OnInit, OnDestroy {
   }
 
   fetchDashboardStats(): void {
-    this.http.get<any>("http://localhost:5139/api/Dashboard/stats").subscribe({
+    this.http.get<any>(`${CONFIG.API_URL}/Dashboard/stats`).subscribe({
       next: (data) => {
         this.zone.run(() => {
           // Map data from C# backend with case-insensitive fallback
@@ -92,3 +93,4 @@ export class FacultyHomeComponent implements OnInit, OnDestroy {
     });
   }
 }
+

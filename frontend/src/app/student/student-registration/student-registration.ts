@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router, RouterModule } from '@angular/router';
+import { CONFIG } from '../../config';
 
 @Component({
   selector: 'app-student-registration',
@@ -45,7 +46,7 @@ export class StudentRegistrationComponent implements OnInit {
 
   loadDepartments(): void {
     // This calls your Admin Controller to get the real departments
-    this.http.get<any[]>("http://localhost:5139/api/Admin/view-departments")
+    this.http.get<any[]>(`${CONFIG.API_URL}/Admin/view-departments`)
       .subscribe({
         next: (data) => {
           this.departments = data;
@@ -57,7 +58,7 @@ export class StudentRegistrationComponent implements OnInit {
   }
 
   loadFaculties(): void {
-    this.http.get<any[]>("http://localhost:5139/api/Faculty/all")
+    this.http.get<any[]>(`${CONFIG.API_URL}/Faculty/all`)
       .subscribe({
         next: (data) => {
           this.faculties = data;
@@ -80,7 +81,7 @@ onSubmit(): void {
   this.isLoading = true;
 
   // Use the local API URL (Ensure this port matches your backend)
-  const apiUrl = "http://localhost:5139/api/Student/register";
+  const apiUrl = `${CONFIG.API_URL}/Student/register`;
 
   this.http.post(apiUrl, this.form).subscribe({
     next: (res: any) => {

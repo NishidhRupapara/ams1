@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -22,7 +23,7 @@ export class AddNoticeComponent {
   message: string | null = null;
   error: string | null = null;
 
-  private apiUrl = "http://localhost:5139/api/Admin/AddNotice";
+  private apiUrl = `${CONFIG.API_URL}/Admin/AddNotice`;
 
   constructor(private http: HttpClient, private cdr: ChangeDetectorRef) {}
 

@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -29,7 +30,7 @@ export class FacultyExamStudentsComponent implements OnInit {
 
   fetchExams(): void {
     if (!this.facultyId) return;
-    this.http.get<any[]>(`http://localhost:5139/api/Exam/faculty/${this.facultyId}`).subscribe(data => {
+    this.http.get<any[]>(`${CONFIG.API_URL}/Exam/faculty/${this.facultyId}`).subscribe(data => {
       this.exams = data;
     });
   }
@@ -43,7 +44,7 @@ export class FacultyExamStudentsComponent implements OnInit {
     this.selectedExam = exam;
     this.isLoading = true;
     // Assuming an endpoint exists for exam attempts. If not, I'll use dummy data for now
-    this.http.get<any[]>(`http://localhost:5139/api/Exam/attempts/${exam.id || exam.Id}`).subscribe({
+    this.http.get<any[]>(`${CONFIG.API_URL}/Exam/attempts/${exam.id || exam.Id}`).subscribe({
       next: (data) => {
         this.attempts = data;
         this.isLoading = false;
@@ -66,3 +67,4 @@ export class FacultyExamStudentsComponent implements OnInit {
     });
   }
 }
+

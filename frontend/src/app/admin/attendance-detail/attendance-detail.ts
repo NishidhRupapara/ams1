@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -16,7 +17,7 @@ export class AttendanceDetailComponent implements OnInit {
   loading: boolean = true;
   id: string | null = null;
 
-  private apiUrl = "http://localhost:5139/api/Admin/history";
+  private apiUrl = `${CONFIG.API_URL}/Admin/history`;
 
   constructor(
     private http: HttpClient,

@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -48,7 +49,7 @@ export class StudentHomeComponent implements OnInit {
   loadDashboardData() {
     this.zone.run(() => {
       // 1. Fetch Attendance Stats
-      this.http.get<any[]>(`http://localhost:5139/api/Student/my-attendance/${this.studentId}`)
+      this.http.get<any[]>(`${CONFIG.API_URL}/Student/my-attendance/${this.studentId}`)
         .subscribe({
           next: (data) => {
             const attendanceData = Array.isArray(data) ? data : [];
@@ -64,7 +65,7 @@ export class StudentHomeComponent implements OnInit {
         });
 
       // 2. Fetch Latest Notice
-      this.http.get<any[]>(`http://localhost:5139/api/Admin/notices`)
+      this.http.get<any[]>(`${CONFIG.API_URL}/Admin/notices`)
         .subscribe(notices => {
           this.latestNotice = notices[0];
           this.cdr.detectChanges();

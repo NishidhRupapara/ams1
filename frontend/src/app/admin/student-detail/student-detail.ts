@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -31,7 +32,7 @@ export class StudentDetailComponent implements OnInit {
 
   fetchStudentDetails(id: string) {
     this.isLoading = true;
-    this.http.get(`http://localhost:5139/api/Student/${id}`).subscribe({
+    this.http.get(`${CONFIG.API_URL}/Student/${id}`).subscribe({
       next: (data) => {
         this.student = data;
         this.isLoading = false;
@@ -46,3 +47,4 @@ export class StudentDetailComponent implements OnInit {
     });
   }
 }
+

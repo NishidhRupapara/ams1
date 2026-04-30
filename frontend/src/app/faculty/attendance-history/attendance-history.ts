@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
 import { HttpClient } from '@angular/common/http';
@@ -51,7 +52,7 @@ export class AttendanceHistoryComponent implements OnInit {
   }
 
   fetchHistory(): void {
-    this.http.get<AttendanceRecord[]>(`http://localhost:5139/api/Student/history/${this.fidsession}`)
+    this.http.get<AttendanceRecord[]>(`${CONFIG.API_URL}/Student/history/${this.fidsession}`)
       .subscribe({
         next: (res) => {
           this.attendanceData = res;
@@ -116,7 +117,7 @@ export class AttendanceHistoryComponent implements OnInit {
       Date: this.selectedRecord.date
     };
 
-    this.http.put(`http://localhost:5139/api/Admin/history/${this.selectedRecord.id}`, payload)
+    this.http.put(`${CONFIG.API_URL}/Admin/history/${this.selectedRecord.id}`, payload)
       .subscribe({
         next: () => {
           alert("✅ Record updated!");

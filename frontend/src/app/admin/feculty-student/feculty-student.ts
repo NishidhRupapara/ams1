@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -23,7 +24,7 @@ export class FecultyStudentComponent implements OnInit {
   ngOnInit() { this.fetchFaculties(); }
 
   fetchFaculties() {
-    this.http.get<any[]>('http://localhost:5139/api/Faculty/all').subscribe({
+    this.http.get<any[]>(`${CONFIG.API_URL}/Faculty/all`).subscribe({
       next: (data: any) => {
         this.faculties = Array.isArray(data) ? data : (data?.data || []);
         this.loading = false;
@@ -47,7 +48,7 @@ export class FecultyStudentComponent implements OnInit {
       this.cdr.detectChanges();
     });
 
-    this.http.get<any[]>(`http://localhost:5139/api/Student/${targetId}/students`).subscribe({
+    this.http.get<any[]>(`${CONFIG.API_URL}/Student/${targetId}/students`).subscribe({
       next: (res) => {
         this.zone.run(() => {
           this.students = Array.isArray(res) ? res : (res as any).data || [];
@@ -69,3 +70,5 @@ export class FecultyStudentComponent implements OnInit {
     this.cdr.detectChanges();
   }
 }
+
+

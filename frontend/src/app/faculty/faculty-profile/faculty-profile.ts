@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component, OnInit, ChangeDetectorRef, NgZone } from '@angular/core'; // 👈 1. Added ChangeDetectorRef
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -42,7 +43,7 @@ export class FacultyProfileComponent implements OnInit {
   }
 
   fetchProfile(): void {
-    this.http.get<any>(`http://localhost:5139/api/Faculty/profile/${this.facultyId}`)
+    this.http.get<any>(`${CONFIG.API_URL}/Faculty/profile/${this.facultyId}`)
       .subscribe({
         next: (data) => {
           this.zone.run(() => {
@@ -71,7 +72,7 @@ export class FacultyProfileComponent implements OnInit {
   }
 
   saveProfile(): void {
-    this.http.put(`http://localhost:5139/api/Faculty/profile/${this.facultyId}`, this.editData)
+    this.http.put(`${CONFIG.API_URL}/Faculty/profile/${this.facultyId}`, this.editData)
       .subscribe({
         next: () => {
           this.profile = { ...this.editData }; 

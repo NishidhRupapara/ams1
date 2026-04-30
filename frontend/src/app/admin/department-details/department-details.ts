@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core'; // ✅ Import this
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -17,7 +18,7 @@ export class DepartmentDetailsComponent implements OnInit {
   showEditModal: boolean = false;
   selectedDept: any = {};
 
-  private apiUrl = "http://localhost:5139/api/Departments";
+  private apiUrl = `${CONFIG.API_URL}/Departments`;
 
   constructor(
     private http: HttpClient, 

@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -30,7 +31,7 @@ export class StudentEditComponent implements OnInit {
     parentName: '', parentMobile: '', parentEmail: ''
   };
 
-  private baseUrl = "http://localhost:5139/api";
+  private baseUrl = `${CONFIG.API_URL}`;
 
   constructor(
     private route: ActivatedRoute,
@@ -152,3 +153,4 @@ export class StudentEditComponent implements OnInit {
     });
   }
 }
+

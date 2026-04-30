@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -24,7 +25,7 @@ export class FacultyRegistrationComponent implements OnInit {
   loading: boolean = false;
   facultyId: any = null;
 
-  private baseUrl = "http://localhost:5139/api";
+  private baseUrl = `${CONFIG.API_URL}`;
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -53,7 +54,7 @@ handleSubmit(): void {
   this.loading = true;
   
   // Connect to api/Faculty/register
-  this.http.post<any>("http://localhost:5139/api/Faculty/register", this.form).subscribe({
+  this.http.post<any>(`${CONFIG.API_URL}/Faculty/register`, this.form).subscribe({
     next: (response) => {
       alert(`Registration Successful! Your Faculty ID is: ${response.fid}`);
       this.router.navigate(['/faculty-login']);

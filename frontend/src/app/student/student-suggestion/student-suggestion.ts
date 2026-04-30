@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -41,7 +42,7 @@ export class StudentSuggestionComponent implements OnInit {
   }
 
   loadHistory() {
-    this.http.get<any[]>(`http://localhost:5139/api/Faculty/AllSuggestionFaculty`)
+    this.http.get<any[]>(`${CONFIG.API_URL}/Faculty/AllSuggestionFaculty`)
       .subscribe(data => {
          console.log("Suggestions received (raw):", data);
          this.zone.run(() => {
@@ -82,7 +83,7 @@ export class StudentSuggestionComponent implements OnInit {
 
   onSubmit() {
     this.isLoading = true;
-    this.http.post("http://localhost:5139/api/Student/suggestion", this.form)
+    this.http.post(`${CONFIG.API_URL}/Student/suggestion`, this.form)
       .subscribe({
         next: (res) => {
           this.zone.run(() => {
@@ -104,3 +105,4 @@ export class StudentSuggestionComponent implements OnInit {
       });
   }
 }
+

@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -35,7 +36,7 @@ export class AdminMaterialsComponent implements OnInit {
   }
 
   fetchMaterials(): void {
-    this.http.get<any[]>("http://localhost:5139/api/Admin/all-materials").subscribe({
+    this.http.get<any[]>(`${CONFIG.API_URL}/Admin/all-materials`).subscribe({
       next: (data) => {
         this.materials = data;
         this.isLoading = false;
@@ -45,7 +46,7 @@ export class AdminMaterialsComponent implements OnInit {
   }
 
   fetchDepartments(): void {
-    this.http.get<any[]>("http://localhost:5139/api/Admin/view-departments").subscribe(data => this.departments = data);
+    this.http.get<any[]>(`${CONFIG.API_URL}/Admin/view-departments`).subscribe(data => this.departments = data);
   }
 
   onFileChange(event: any): void {
@@ -67,7 +68,7 @@ export class AdminMaterialsComponent implements OnInit {
     }
 
     this.isPosting = true;
-    this.http.post("http://localhost:5139/api/Admin/post-material", this.newMaterial).subscribe({
+    this.http.post(`${CONFIG.API_URL}/Admin/post-material`, this.newMaterial).subscribe({
       next: () => {
         alert("Material posted successfully!");
         this.newMaterial = { title: '', subject: '', department: '', link: '', fileName: '', fileData: '', facultyId: 'Admin' };
@@ -91,7 +92,7 @@ export class AdminMaterialsComponent implements OnInit {
 
   deleteMaterial(id: string): void {
     if (confirm("Are you sure you want to delete this study material?")) {
-      this.http.delete(`http://localhost:5139/api/Admin/material/${id}`).subscribe({
+      this.http.delete(`${CONFIG.API_URL}/Admin/material/${id}`).subscribe({
         next: () => {
           this.materials = this.materials.filter(m => m.id !== id);
           alert("Material deleted successfully!");
@@ -101,3 +102,4 @@ export class AdminMaterialsComponent implements OnInit {
     }
   }
 }
+

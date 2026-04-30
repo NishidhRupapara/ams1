@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -30,7 +31,7 @@ export class FacultyNoticeComponent implements OnInit {
 
   fetchNotices(): void {
     this.loading = true;
-    this.http.get<any[]>("http://localhost:5139/api/Admin/AllNoticeAdmin")
+    this.http.get<any[]>(`${CONFIG.API_URL}/Admin/AllNoticeAdmin`)
       .subscribe({
         next: (res) => {
           // Sort by createdAt descending (Newest first)

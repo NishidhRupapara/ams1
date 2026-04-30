@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { RouterModule, Router } from '@angular/router';
 import { AdminSidebarComponent } from '../admin-sidebar/admin-sidebar';
+import { CONFIG } from '../../config';
 
 @Component({
   selector: 'app-view-students',
@@ -13,7 +14,7 @@ import { AdminSidebarComponent } from '../admin-sidebar/admin-sidebar';
 export class ViewStudentsComponent implements OnInit {
   students: any[] = [];
   isLoading: boolean = true;
-  private apiUrl = 'http://localhost:5139/api/Student'; // Adjust if your port changed
+  private apiUrl = `${CONFIG.API_URL}/Student`;
 
   constructor(
     private http: HttpClient,

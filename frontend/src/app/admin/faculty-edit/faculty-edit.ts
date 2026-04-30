@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -31,7 +32,7 @@ export class FacultyEditComponent implements OnInit {
   }
 
   fetchFaculty() {
-    this.http.get(`http://localhost:5139/api/Faculty/profile/${this.id}`).subscribe({
+    this.http.get(`${CONFIG.API_URL}/Faculty/profile/${this.id}`).subscribe({
       next: (data: any) => {
         this.faculty = data;
         // Format ISO dates to YYYY-MM-DD for HTML inputs
@@ -49,7 +50,7 @@ export class FacultyEditComponent implements OnInit {
 
   // ✅ Restored the handleUpdate function to do the HTTP PUT (saving the data)
   handleUpdate() {
-    this.http.put(`http://localhost:5139/api/Faculty/profile/${this.id}`, this.faculty).subscribe({
+    this.http.put(`${CONFIG.API_URL}/Faculty/profile/${this.id}`, this.faculty).subscribe({
       next: () => {
         alert("✅ Faculty Updated Successfully!");
         this.router.navigate(['/view-faculty']);

@@ -35,7 +35,7 @@ export class AdminHomeComponent implements OnInit {
     if (typeof sessionStorage !== 'undefined') {
       sessionStorage.removeItem('sessionUsername');
     }
-    this.router.navigate(['/admin/login']);
+    this.router.navigate(['/admin-login']);
   }
   ngOnInit() {
     if (typeof window !== 'undefined' && window.sessionStorage) {

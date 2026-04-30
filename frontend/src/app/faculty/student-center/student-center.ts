@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -35,7 +36,7 @@ export class StudentCenterComponent implements OnInit {
 
   fetchMyStudents(): void {
     this.isLoading = true;
-    this.http.get<any[]>(`http://localhost:5139/api/Student/${this.facultyId}/students`)
+    this.http.get<any[]>(`${CONFIG.API_URL}/Student/${this.facultyId}/students`)
       .subscribe({
         next: (data) => {
           this.zone.run(() => {
@@ -86,3 +87,4 @@ export class StudentCenterComponent implements OnInit {
     this.cdr.detectChanges();
   }
 }
+

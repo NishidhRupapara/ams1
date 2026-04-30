@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -38,7 +39,7 @@ export class StudentRecordComponent implements OnInit {
   fetchAllHistory(): void {
     this.isLoading = true;
     // Calling your C# API endpoint for attendance history
-    this.http.get<any[]>(`http://localhost:5139/api/Student/history/${this.facultyId}`)
+    this.http.get<any[]>(`${CONFIG.API_URL}/Student/history/${this.facultyId}`)
       .subscribe({
         next: (data) => {
           this.attendanceHistory = data;

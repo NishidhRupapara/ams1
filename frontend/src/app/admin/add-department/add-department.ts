@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component, ChangeDetectorRef } from '@angular/core'; // ✅ Added ChangeDetectorRef
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -16,7 +17,7 @@ export class AddDepartmentComponent {
   imageUrlError: boolean = false;
   message = { type: "", text: "" };
 
-  private apiUrl = "http://localhost:5139/api/Departments/AddDepartment";
+  private apiUrl = `${CONFIG.API_URL}/Departments/AddDepartment`;
 
   constructor(
     private http: HttpClient, 

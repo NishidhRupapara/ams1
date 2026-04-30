@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -30,7 +31,7 @@ export class StudentLoginComponent {
 
     this.isLoading = true;
 
-    this.http.post("http://localhost:5139/api/Student/login", this.loginData)
+    this.http.post(`${CONFIG.API_URL}/Student/login`, this.loginData)
       .subscribe({
         next: (res: any) => {
           // ✅ FIX: C# returns "Sid", "Name", and "Department" (Uppercase)

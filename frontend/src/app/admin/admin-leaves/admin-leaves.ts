@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -24,7 +25,7 @@ export class AdminLeavesComponent implements OnInit {
   }
 
   fetchLeaves(): void {
-    this.http.get<any[]>("http://localhost:5139/api/Admin/all-leaves").subscribe({
+    this.http.get<any[]>(`${CONFIG.API_URL}/Admin/all-leaves`).subscribe({
       next: (data) => {
         this.leaves = data;
         this.isLoading = false;
@@ -46,7 +47,7 @@ export class AdminLeavesComponent implements OnInit {
       adminRemark: this.adminRemark
     };
 
-    this.http.put(`http://localhost:5139/api/Admin/leave/${this.selectedLeave.id}`, payload).subscribe({
+    this.http.put(`${CONFIG.API_URL}/Admin/leave/${this.selectedLeave.id}`, payload).subscribe({
       next: () => {
         alert(`Leave ${status} successfully!`);
         this.selectedLeave = null;
@@ -56,3 +57,4 @@ export class AdminLeavesComponent implements OnInit {
     });
   }
 }
+

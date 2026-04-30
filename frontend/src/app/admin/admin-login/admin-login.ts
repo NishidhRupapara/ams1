@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -30,7 +31,7 @@ export class AdminLoginComponent {
 
     this.isLoading = true;
 
-    this.http.post('http://localhost:5139/api/Admin/login', this.credentials).subscribe({
+    this.http.post(`${CONFIG.API_URL}/Admin/login`, this.credentials).subscribe({
       next: (response: any) => {
         // 1. Store auth data in localStorage
         localStorage.setItem('adminToken', 'true');
@@ -55,3 +56,4 @@ export class AdminLoginComponent {
     });
   }
 }
+

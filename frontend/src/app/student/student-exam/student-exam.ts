@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -63,7 +64,7 @@ export class StudentExamComponent implements OnInit, OnDestroy {
 
   fetchAvailableExams(): void {
     if (!this.department) return;
-    this.http.get<any[]>(`http://localhost:5139/api/Exam/available/${this.department}`).subscribe(data => {
+    this.http.get<any[]>(`${CONFIG.API_URL}/Exam/available/${this.department}`).subscribe(data => {
       this.availableExams = data;
       this.startWaitTimer();
       this.cdr.detectChanges();
@@ -85,7 +86,7 @@ export class StudentExamComponent implements OnInit, OnDestroy {
     }
 
     this.isLoading = true;
-    this.http.get<any>(`http://localhost:5139/api/Exam/details/${examId}`).subscribe({
+    this.http.get<any>(`${CONFIG.API_URL}/Exam/details/${examId}`).subscribe({
       next: (data) => {
         this.currentExam = data;
         this.answers = new Array(data.questions.length).fill(-1);
@@ -147,7 +148,7 @@ export class StudentExamComponent implements OnInit, OnDestroy {
       SelectedOptions: this.answers
     };
 
-    this.http.post("http://localhost:5139/api/Exam/attempt", payload).subscribe({
+    this.http.post(`${CONFIG.API_URL}/Exam/attempt`, payload).subscribe({
       next: (res: any) => {
         this.examResult = res;
         this.viewMode = 'result';
@@ -162,3 +163,4 @@ export class StudentExamComponent implements OnInit, OnDestroy {
     if (this.waitTimer) clearInterval(this.waitTimer);
   }
 }
+

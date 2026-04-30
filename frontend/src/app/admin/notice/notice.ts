@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -21,7 +22,7 @@ export class NoticeComponent implements OnInit {
   selectedNotice: any = null;
   editData = { noticeTitle: "", noticeMessage: "" };
 
-  private apiUrl = "http://localhost:5139/api/Admin";
+  private apiUrl = `${CONFIG.API_URL}/Admin`;
 
   constructor(private http: HttpClient, private cdr: ChangeDetectorRef) { }
 
@@ -46,7 +47,7 @@ export class NoticeComponent implements OnInit {
 
   // Example: View Logic
   handleView(id: number) {
-    this.http.get(`http://localhost:5139/api/Admin/notice/${id}`).subscribe({
+    this.http.get(`${CONFIG.API_URL}/Admin/notice/${id}`).subscribe({
       next: (data) => {
         this.selectedNotice = data;
         this.showViewModal = true;

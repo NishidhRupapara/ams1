@@ -1,3 +1,4 @@
+import { CONFIG } from '../../config';
 import { Component, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
@@ -37,7 +38,7 @@ export class FacultyDetailComponent implements OnInit {
   }
 
   fetchFaculty() {
-    this.http.get(`http://localhost:5139/api/Faculty/profile/${this.id}`).subscribe({
+    this.http.get(`${CONFIG.API_URL}/Faculty/profile/${this.id}`).subscribe({
       next: (data: any) => {
         this.zone.run(() => {
           this.faculty = data;
@@ -55,3 +56,4 @@ export class FacultyDetailComponent implements OnInit {
     });
   }
 }
+

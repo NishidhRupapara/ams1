@@ -20,8 +20,6 @@ builder.Services.AddScoped<IMongoDatabase>(s =>
 // Services
 builder.Services.AddSingleton<MongoDbService>();
 
-// --- CORS CONFIGURATION ---
-// Updated to include both React and Angular origins
 const string myAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 builder.Services.AddCors(options =>
@@ -29,7 +27,11 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: myAllowSpecificOrigins,
         policy =>
         {
-            policy.WithOrigins("http://localhost:3000", "http://localhost:4200") // Added Angular port
+            policy.WithOrigins(
+                    "http://localhost:3000", 
+                    "http://localhost:4200",
+                    "https://NishidhRupapara.github.io" // Added GitHub Pages origin
+                  )
                   .AllowAnyHeader()
                   .AllowAnyMethod();
         });

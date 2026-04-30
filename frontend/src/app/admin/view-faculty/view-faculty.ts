@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AdminSidebarComponent } from '../admin-sidebar/admin-sidebar';
+import { CONFIG } from '../../config';
 
 @Component({
   selector: 'app-view-faculty',
@@ -16,7 +17,7 @@ export class ViewFacultyComponent implements OnInit {
   faculties: any[] = [];
   loading: boolean = true;
 
-  private apiUrl = "http://localhost:5139/api/Faculty";
+  private apiUrl = `${CONFIG.API_URL}/Faculty`;
 
   constructor(
     private http: HttpClient,
