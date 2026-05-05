@@ -10,7 +10,7 @@ RUN dotnet restore "WebApplication1.csproj"
 COPY . .
 RUN dotnet publish -c Release -o out
 
-# Stage 2: Generate the runtime image
+# Stage 2: Generate the runtime image!
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=build-env /app/out .
