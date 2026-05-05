@@ -2,11 +2,13 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
 WORKDIR /app
 
-# Copy the specific project file and restore dependencies
-COPY ["WebApplication1/WebApplication1.csproj", "./"]
+# Copy the project file from the exact path in your repository
+COPY ["Back/WebApplication1/WebApplication1/WebApplication1.csproj", "./"]
+
+# Restore dependencies
 RUN dotnet restore "WebApplication1.csproj"
 
-# Copy the remaining source files and build
+# Copy the rest of the files and build
 COPY . .
 RUN dotnet publish -c Release -o out
 
